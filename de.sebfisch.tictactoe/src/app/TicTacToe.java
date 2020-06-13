@@ -8,7 +8,7 @@ import game.Board;
 /**
  * Implements a graphical user interface for playing the game.
  */
-public class TicTacToeApp {
+public class TicTacToe {
 
 	/**
 	 * Runs the game.
@@ -16,7 +16,7 @@ public class TicTacToeApp {
 	 * @param args command line arguments are ignored
 	 */
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> new TicTacToeApp().show());
+		SwingUtilities.invokeLater(() -> new TicTacToe().show());
 	}
 
 	private static final String WINDOW_TITLE = "Tic Tac Toe";
@@ -34,7 +34,7 @@ public class TicTacToeApp {
 	/**
 	 * Creates a graphical user interface for the game.
 	 */
-	public TicTacToeApp() {
+	public TicTacToe() {
 		board = GameHelpers.emptyBoard();
 		window = emptyWindow(WINDOW_TITLE);
 		window.getContentPane().add(GameHelpers.boardComponent(board));

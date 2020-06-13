@@ -5,13 +5,20 @@
     <eLiterals name="X"/>
     <eLiterals name="O" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Field">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mark" eType="#//Player"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Board">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fields" lowerBound="9"
-        upperBound="9" eType="#//Field" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="current" lowerBound="1"
+        upperBound="9" eType="#//Field" containment="true" eOpposite="#//Field/board"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentPlayer" lowerBound="1"
+        eType="#//Player"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Field">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mark" eType="#//Mark" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="board" lowerBound="1" eType="#//Board"
+        eOpposite="#//Board/fields"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mark">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="player" lowerBound="1"
         eType="#//Player"/>
   </eClassifiers>
 </ecore:EPackage>

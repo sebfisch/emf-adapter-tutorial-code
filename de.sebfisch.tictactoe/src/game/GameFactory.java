@@ -40,6 +40,15 @@ public interface GameFactory extends EFactory {
 	Board createBoard();
 
 	/**
+	 * Returns a new object of class '<em>Mark</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mark</em>'.
+	 * @generated
+	 */
+	Mark createMark();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

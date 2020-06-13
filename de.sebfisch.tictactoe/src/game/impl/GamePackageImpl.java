@@ -6,6 +6,7 @@ import game.Board;
 import game.Field;
 import game.GameFactory;
 import game.GamePackage;
+import game.Mark;
 import game.Player;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -36,6 +37,13 @@ public class GamePackageImpl extends EPackageImpl implements GamePackage {
 	 * @generated
 	 */
 	private EClass boardEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass markEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,7 +127,25 @@ public class GamePackageImpl extends EPackageImpl implements GamePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Mark() {
+	public EReference getField_Mark() {
+		return (EReference)fieldEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getField_Board() {
+		return (EReference)fieldEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getField_Index() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -146,8 +172,26 @@ public class GamePackageImpl extends EPackageImpl implements GamePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBoard_Current() {
+	public EAttribute getBoard_CurrentPlayer() {
 		return (EAttribute)boardEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMark() {
+		return markEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMark_Player() {
+		return (EAttribute)markEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -187,12 +231,17 @@ public class GamePackageImpl extends EPackageImpl implements GamePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		fieldEClass = createEClass(FIELD);
-		createEAttribute(fieldEClass, FIELD__MARK);
-
 		boardEClass = createEClass(BOARD);
 		createEReference(boardEClass, BOARD__FIELDS);
-		createEAttribute(boardEClass, BOARD__CURRENT);
+		createEAttribute(boardEClass, BOARD__CURRENT_PLAYER);
+
+		fieldEClass = createEClass(FIELD);
+		createEAttribute(fieldEClass, FIELD__INDEX);
+		createEReference(fieldEClass, FIELD__MARK);
+		createEReference(fieldEClass, FIELD__BOARD);
+
+		markEClass = createEClass(MARK);
+		createEAttribute(markEClass, MARK__PLAYER);
 
 		// Create enums
 		playerEEnum = createEEnum(PLAYER);
@@ -228,12 +277,17 @@ public class GamePackageImpl extends EPackageImpl implements GamePackage {
 		// Add supertypes to classes
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(fieldEClass, Field.class, "Field", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getField_Mark(), this.getPlayer(), "mark", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(boardEClass, Board.class, "Board", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBoard_Fields(), this.getField(), null, "fields", null, 9, 9, Board.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBoard_Current(), this.getPlayer(), "current", null, 1, 1, Board.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBoard_Fields(), this.getField(), this.getField_Board(), "fields", null, 9, 9, Board.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBoard_CurrentPlayer(), this.getPlayer(), "currentPlayer", null, 1, 1, Board.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fieldEClass, Field.class, "Field", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getField_Index(), ecorePackage.getEInt(), "index", null, 1, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getField_Mark(), this.getMark(), null, "mark", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getField_Board(), this.getBoard(), this.getBoard_Fields(), "board", null, 1, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(markEClass, Mark.class, "Mark", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMark_Player(), this.getPlayer(), "player", null, 1, 1, Mark.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(playerEEnum, Player.class, "Player");

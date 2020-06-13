@@ -3,13 +3,15 @@ package app;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import game.Board;
+
 /**
- * This class implements a graphical user interface for playing Tic Tac Toe.
+ * Implements a graphical user interface for playing the game.
  */
 public class TicTacToeApp {
 	
 	/**
-	 * Runs the Game.
+	 * Runs the game.
 	 * 
 	 * @param args command line arguments are ignored
 	 */
@@ -18,22 +20,31 @@ public class TicTacToeApp {
 	}
 	
 	private static final String WINDOW_TITLE = "Tic Tac Toe";
-	
-	private JFrame frame;
+
+	private static JFrame emptyWindow() {
+		final JFrame frame = new JFrame(WINDOW_TITLE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		return frame;
+	}
+
+	private Board board;
+	private JFrame window;
 	
 	/**
 	 * Creates a graphical user interface for the game.
 	 */
 	public TicTacToeApp() {
-		frame = new JFrame(WINDOW_TITLE);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		board = GameHelpers.emptyBoard();
+		window = emptyWindow();
+		window.getContentPane().add(GameHelpers.boardComponent(board));
 	}
 	
 	/**
 	 * Displays a window for playing the game.
 	 */
 	public void show() {
-		frame.pack();
-		frame.setVisible(true);
+		window.pack();
+		window.setVisible(true);
 	}
 }

@@ -65,34 +65,7 @@ public interface GamePackage extends EPackage {
 	 * @see game.impl.GamePackageImpl#getField()
 	 * @generated
 	 */
-	int FIELD = 0;
-
-	/**
-	 * The feature id for the '<em><b>Mark</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__MARK = 0;
-
-	/**
-	 * The number of structural features of the '<em>Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD_OPERATION_COUNT = 0;
+	int FIELD = 1;
 
 	/**
 	 * The meta object id for the '{@link game.impl.BoardImpl <em>Board</em>}' class.
@@ -102,7 +75,7 @@ public interface GamePackage extends EPackage {
 	 * @see game.impl.GamePackageImpl#getBoard()
 	 * @generated
 	 */
-	int BOARD = 1;
+	int BOARD = 0;
 
 	/**
 	 * The feature id for the '<em><b>Fields</b></em>' containment reference list.
@@ -114,13 +87,13 @@ public interface GamePackage extends EPackage {
 	int BOARD__FIELDS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Current</b></em>' attribute.
+	 * The feature id for the '<em><b>Current Player</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOARD__CURRENT = 1;
+	int BOARD__CURRENT_PLAYER = 1;
 
 	/**
 	 * The number of structural features of the '<em>Board</em>' class.
@@ -141,6 +114,88 @@ public interface GamePackage extends EPackage {
 	int BOARD_OPERATION_COUNT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__INDEX = 0;
+
+	/**
+	 * The feature id for the '<em><b>Mark</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__MARK = 1;
+
+	/**
+	 * The feature id for the '<em><b>Board</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__BOARD = 2;
+
+	/**
+	 * The number of structural features of the '<em>Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link game.impl.MarkImpl <em>Mark</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see game.impl.MarkImpl
+	 * @see game.impl.GamePackageImpl#getMark()
+	 * @generated
+	 */
+	int MARK = 2;
+
+	/**
+	 * The feature id for the '<em><b>Player</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MARK__PLAYER = 0;
+
+	/**
+	 * The number of structural features of the '<em>Mark</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MARK_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Mark</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MARK_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link game.Player <em>Player</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,7 +203,7 @@ public interface GamePackage extends EPackage {
 	 * @see game.impl.GamePackageImpl#getPlayer()
 	 * @generated
 	 */
-	int PLAYER = 2;
+	int PLAYER = 3;
 
 
 	/**
@@ -162,15 +217,37 @@ public interface GamePackage extends EPackage {
 	EClass getField();
 
 	/**
-	 * Returns the meta object for the attribute '{@link game.Field#getMark <em>Mark</em>}'.
+	 * Returns the meta object for the containment reference '{@link game.Field#getMark <em>Mark</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Mark</em>'.
+	 * @return the meta object for the containment reference '<em>Mark</em>'.
 	 * @see game.Field#getMark()
 	 * @see #getField()
 	 * @generated
 	 */
-	EAttribute getField_Mark();
+	EReference getField_Mark();
+
+	/**
+	 * Returns the meta object for the container reference '{@link game.Field#getBoard <em>Board</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Board</em>'.
+	 * @see game.Field#getBoard()
+	 * @see #getField()
+	 * @generated
+	 */
+	EReference getField_Board();
+
+	/**
+	 * Returns the meta object for the attribute '{@link game.Field#getIndex <em>Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Index</em>'.
+	 * @see game.Field#getIndex()
+	 * @see #getField()
+	 * @generated
+	 */
+	EAttribute getField_Index();
 
 	/**
 	 * Returns the meta object for class '{@link game.Board <em>Board</em>}'.
@@ -194,15 +271,36 @@ public interface GamePackage extends EPackage {
 	EReference getBoard_Fields();
 
 	/**
-	 * Returns the meta object for the attribute '{@link game.Board#getCurrent <em>Current</em>}'.
+	 * Returns the meta object for the attribute '{@link game.Board#getCurrentPlayer <em>Current Player</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Current</em>'.
-	 * @see game.Board#getCurrent()
+	 * @return the meta object for the attribute '<em>Current Player</em>'.
+	 * @see game.Board#getCurrentPlayer()
 	 * @see #getBoard()
 	 * @generated
 	 */
-	EAttribute getBoard_Current();
+	EAttribute getBoard_CurrentPlayer();
+
+	/**
+	 * Returns the meta object for class '{@link game.Mark <em>Mark</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mark</em>'.
+	 * @see game.Mark
+	 * @generated
+	 */
+	EClass getMark();
+
+	/**
+	 * Returns the meta object for the attribute '{@link game.Mark#getPlayer <em>Player</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Player</em>'.
+	 * @see game.Mark#getPlayer()
+	 * @see #getMark()
+	 * @generated
+	 */
+	EAttribute getMark_Player();
 
 	/**
 	 * Returns the meta object for enum '{@link game.Player <em>Player</em>}'.
@@ -248,12 +346,28 @@ public interface GamePackage extends EPackage {
 		EClass FIELD = eINSTANCE.getField();
 
 		/**
-		 * The meta object literal for the '<em><b>Mark</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Mark</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FIELD__MARK = eINSTANCE.getField_Mark();
+		EReference FIELD__MARK = eINSTANCE.getField_Mark();
+
+		/**
+		 * The meta object literal for the '<em><b>Board</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FIELD__BOARD = eINSTANCE.getField_Board();
+
+		/**
+		 * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FIELD__INDEX = eINSTANCE.getField_Index();
 
 		/**
 		 * The meta object literal for the '{@link game.impl.BoardImpl <em>Board</em>}' class.
@@ -274,12 +388,30 @@ public interface GamePackage extends EPackage {
 		EReference BOARD__FIELDS = eINSTANCE.getBoard_Fields();
 
 		/**
-		 * The meta object literal for the '<em><b>Current</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Current Player</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BOARD__CURRENT = eINSTANCE.getBoard_Current();
+		EAttribute BOARD__CURRENT_PLAYER = eINSTANCE.getBoard_CurrentPlayer();
+
+		/**
+		 * The meta object literal for the '{@link game.impl.MarkImpl <em>Mark</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see game.impl.MarkImpl
+		 * @see game.impl.GamePackageImpl#getMark()
+		 * @generated
+		 */
+		EClass MARK = eINSTANCE.getMark();
+
+		/**
+		 * The meta object literal for the '<em><b>Player</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MARK__PLAYER = eINSTANCE.getMark_Player();
 
 		/**
 		 * The meta object literal for the '{@link game.Player <em>Player</em>}' enum.

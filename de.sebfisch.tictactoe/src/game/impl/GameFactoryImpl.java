@@ -57,8 +57,9 @@ public class GameFactoryImpl extends EFactoryImpl implements GameFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case GamePackage.FIELD: return createField();
 			case GamePackage.BOARD: return createBoard();
+			case GamePackage.FIELD: return createField();
+			case GamePackage.MARK: return createMark();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -112,6 +113,16 @@ public class GameFactoryImpl extends EFactoryImpl implements GameFactory {
 	public Board createBoard() {
 		BoardImpl board = new BoardImpl();
 		return board;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Mark createMark() {
+		MarkImpl mark = new MarkImpl();
+		return mark;
 	}
 
 	/**

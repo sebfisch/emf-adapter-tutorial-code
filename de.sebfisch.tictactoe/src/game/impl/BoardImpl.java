@@ -19,8 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -32,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link game.impl.BoardImpl#getFields <em>Fields</em>}</li>
- *   <li>{@link game.impl.BoardImpl#getCurrent <em>Current</em>}</li>
+ *   <li>{@link game.impl.BoardImpl#getCurrentPlayer <em>Current Player</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,24 +48,24 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 	protected EList<Field> fields;
 
 	/**
-	 * The default value of the '{@link #getCurrent() <em>Current</em>}' attribute.
+	 * The default value of the '{@link #getCurrentPlayer() <em>Current Player</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCurrent()
+	 * @see #getCurrentPlayer()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Player CURRENT_EDEFAULT = Player.X;
+	protected static final Player CURRENT_PLAYER_EDEFAULT = Player.X;
 
 	/**
-	 * The cached value of the '{@link #getCurrent() <em>Current</em>}' attribute.
+	 * The cached value of the '{@link #getCurrentPlayer() <em>Current Player</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCurrent()
+	 * @see #getCurrentPlayer()
 	 * @generated
 	 * @ordered
 	 */
-	protected Player current = CURRENT_EDEFAULT;
+	protected Player currentPlayer = CURRENT_PLAYER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,7 +93,7 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 	 */
 	public EList<Field> getFields() {
 		if (fields == null) {
-			fields = new EObjectContainmentEList<Field>(Field.class, this, GamePackage.BOARD__FIELDS);
+			fields = new EObjectContainmentWithInverseEList<Field>(Field.class, this, GamePackage.BOARD__FIELDS, GamePackage.FIELD__BOARD);
 		}
 		return fields;
 	}
@@ -104,8 +103,8 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Player getCurrent() {
-		return current;
+	public Player getCurrentPlayer() {
+		return currentPlayer;
 	}
 
 	/**
@@ -113,11 +112,26 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCurrent(Player newCurrent) {
-		Player oldCurrent = current;
-		current = newCurrent == null ? CURRENT_EDEFAULT : newCurrent;
+	public void setCurrentPlayer(Player newCurrentPlayer) {
+		Player oldCurrentPlayer = currentPlayer;
+		currentPlayer = newCurrentPlayer == null ? CURRENT_PLAYER_EDEFAULT : newCurrentPlayer;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GamePackage.BOARD__CURRENT, oldCurrent, current));
+			eNotify(new ENotificationImpl(this, Notification.SET, GamePackage.BOARD__CURRENT_PLAYER, oldCurrentPlayer, currentPlayer));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GamePackage.BOARD__FIELDS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFields()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -144,8 +158,8 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 		switch (featureID) {
 			case GamePackage.BOARD__FIELDS:
 				return getFields();
-			case GamePackage.BOARD__CURRENT:
-				return getCurrent();
+			case GamePackage.BOARD__CURRENT_PLAYER:
+				return getCurrentPlayer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -163,8 +177,8 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 				getFields().clear();
 				getFields().addAll((Collection<? extends Field>)newValue);
 				return;
-			case GamePackage.BOARD__CURRENT:
-				setCurrent((Player)newValue);
+			case GamePackage.BOARD__CURRENT_PLAYER:
+				setCurrentPlayer((Player)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -181,8 +195,8 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 			case GamePackage.BOARD__FIELDS:
 				getFields().clear();
 				return;
-			case GamePackage.BOARD__CURRENT:
-				setCurrent(CURRENT_EDEFAULT);
+			case GamePackage.BOARD__CURRENT_PLAYER:
+				setCurrentPlayer(CURRENT_PLAYER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -198,8 +212,8 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 		switch (featureID) {
 			case GamePackage.BOARD__FIELDS:
 				return fields != null && !fields.isEmpty();
-			case GamePackage.BOARD__CURRENT:
-				return current != CURRENT_EDEFAULT;
+			case GamePackage.BOARD__CURRENT_PLAYER:
+				return currentPlayer != CURRENT_PLAYER_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,8 +228,8 @@ public class BoardImpl extends MinimalEObjectImpl.Container implements Board {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (current: ");
-		result.append(current);
+		result.append(" (currentPlayer: ");
+		result.append(currentPlayer);
 		result.append(')');
 		return result.toString();
 	}

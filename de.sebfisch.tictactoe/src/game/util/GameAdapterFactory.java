@@ -68,12 +68,16 @@ public class GameAdapterFactory extends AdapterFactoryImpl {
 	protected GameSwitch<Adapter> modelSwitch =
 		new GameSwitch<Adapter>() {
 			@Override
+			public Adapter caseBoard(Board object) {
+				return createBoardAdapter();
+			}
+			@Override
 			public Adapter caseField(Field object) {
 				return createFieldAdapter();
 			}
 			@Override
-			public Adapter caseBoard(Board object) {
-				return createBoardAdapter();
+			public Adapter caseMark(Mark object) {
+				return createMarkAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -120,6 +124,20 @@ public class GameAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBoardAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link game.Mark <em>Mark</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see game.Mark
+	 * @generated
+	 */
+	public Adapter createMarkAdapter() {
 		return null;
 	}
 

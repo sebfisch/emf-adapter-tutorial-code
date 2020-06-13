@@ -66,15 +66,21 @@ public class GameSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case GamePackage.BOARD: {
+				Board board = (Board)theEObject;
+				T result = caseBoard(board);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GamePackage.FIELD: {
 				Field field = (Field)theEObject;
 				T result = caseField(field);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GamePackage.BOARD: {
-				Board board = (Board)theEObject;
-				T result = caseBoard(board);
+			case GamePackage.MARK: {
+				Mark mark = (Mark)theEObject;
+				T result = caseMark(mark);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -109,6 +115,21 @@ public class GameSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBoard(Board object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mark</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mark</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMark(Mark object) {
 		return null;
 	}
 

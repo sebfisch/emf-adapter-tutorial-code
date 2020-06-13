@@ -9,7 +9,7 @@ import game.Board;
  * Implements a graphical user interface for playing the game.
  */
 public class TicTacToeApp {
-	
+
 	/**
 	 * Runs the game.
 	 * 
@@ -18,11 +18,11 @@ public class TicTacToeApp {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> new TicTacToeApp().show());
 	}
-	
+
 	private static final String WINDOW_TITLE = "Tic Tac Toe";
 
-	private static JFrame emptyWindow() {
-		final JFrame frame = new JFrame(WINDOW_TITLE);
+	private static JFrame emptyWindow(String title) {
+		final JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		return frame;
@@ -30,16 +30,16 @@ public class TicTacToeApp {
 
 	private Board board;
 	private JFrame window;
-	
+
 	/**
 	 * Creates a graphical user interface for the game.
 	 */
 	public TicTacToeApp() {
 		board = GameHelpers.emptyBoard();
-		window = emptyWindow();
+		window = emptyWindow(WINDOW_TITLE);
 		window.getContentPane().add(GameHelpers.boardComponent(board));
 	}
-	
+
 	/**
 	 * Displays a window for playing the game.
 	 */

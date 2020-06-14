@@ -1,6 +1,7 @@
 package game.adapters;
 
 import java.awt.Dimension;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.swing.JButton;
@@ -33,13 +34,16 @@ public class FieldUi implements Adapter {
 	 * Provides access to the field UI registered with a field model instance.
 	 *
 	 * @param field field model instance
-	 * @return field UI or null if none is registered with the given field
+	 *
+	 * @return field UI
+	 *
+	 * @throws NoSuchElementException if no field UI is registered
 	 */
 	public static FieldUi from(final Field field) {
 		return field.eAdapters().stream() //
 				.filter(FieldUi.class::isInstance) //
 				.map(FieldUi.class::cast) //
-				.findFirst().orElse(null);
+				.findFirst().orElseThrow();
 	}
 
 	/**
@@ -85,14 +89,14 @@ public class FieldUi implements Adapter {
 	}
 
 	/**
-	 * Shows the name of the given player on the user interface component for the
+	 * Shows the name of the marking player on the user interface component for the
 	 * associated field.
-	 *
-	 * @param player player to use for marking
 	 */
-	public void mark(final Player player) {
-		BoardUi.from(field.getBoard()) //
-				.replaceChild(field.getIndex(), UiConstructors.boldLabel(player.toString(), LABEL_SIZE));
+	public void updateMark() {
+		getMarkingPlayer().ifPresent(player -> {
+			final JComponent child = UiConstructors.boldLabel(player.toString(), LABEL_SIZE);
+			BoardUi.from(field.getBoard()).replaceChild(field.getIndex(), child);
+		});
 	}
 
 	@Override
@@ -103,7 +107,7 @@ public class FieldUi implements Adapter {
 		if (notification.getEventType() == Notification.SET) {
 			switch (notification.getFeatureID(Field.class)) {
 			case GamePackage.FIELD__MARK:
-				getMarkingPlayer().ifPresent(this::mark);
+				updateMark();
 				break;
 			default:
 				break;

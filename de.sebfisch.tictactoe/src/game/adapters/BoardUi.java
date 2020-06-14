@@ -1,6 +1,7 @@
 package game.adapters;
 
 import java.awt.GridLayout;
+import java.util.NoSuchElementException;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -25,13 +26,16 @@ public class BoardUi implements Adapter {
 	 * Provides access to the board UI registered with a board model instance.
 	 *
 	 * @param board board model instance
-	 * @return board UI or null if none is registered with the given board
+	 *
+	 * @return board UI
+	 *
+	 * @throws NoSuchElementException if no board UI is registered
 	 */
 	public static BoardUi from(final Board board) {
 		return board.eAdapters().stream() //
 				.filter(BoardUi.class::isInstance) //
 				.map(BoardUi.class::cast) //
-				.findFirst().orElse(null);
+				.findFirst().orElseThrow();
 	}
 
 	/**

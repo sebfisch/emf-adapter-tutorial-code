@@ -1,4 +1,4 @@
-package app;
+package game.helpers;
 
 import java.awt.GridLayout;
 
@@ -12,7 +12,7 @@ import game.Player;
 /**
  * Provides static methods operating on board model instances.
  */
-class BoardHelpers {
+public class BoardHelpers {
 
 	private static final int GRID_SIZE = 3;
 	private static final int LABEL_SIZE = 90;
@@ -28,7 +28,7 @@ class BoardHelpers {
 	 *
 	 * @return component representing the given board
 	 */
-	static JComponent getComponent(final Board board) {
+	public static JComponent getComponent(final Board board) {
 		final JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
 		board.getFields().forEach(field -> panel.add(FieldHelpers.unmarkedFieldComponent(field, panel)));
@@ -43,7 +43,7 @@ class BoardHelpers {
 	 * @param index     index of child to replace
 	 * @param player    player to create a mark for
 	 */
-	static void markFieldAt(final JComponent container, final int index, final Player player) {
+	public static void markFieldAt(final JComponent container, final int index, final Player player) {
 		container.remove(index);
 		container.add(UiConstructors.boldLabel(player.toString(), LABEL_SIZE), index);
 		container.revalidate();

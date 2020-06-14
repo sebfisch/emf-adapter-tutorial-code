@@ -195,6 +195,20 @@ public class ObjectAdapter<T extends EObject> implements Adapter {
 
 	@Override
 	public void notifyChanged(final Notification notification) {
+		if (notification.isTouch()) {
+			return;
+		}
+		notifyChanged(notification.getEventType(), notification.getFeatureID(targetC));
+	}
+
+	/**
+	 * Restricted variant of {@link Adapter::notifyChanged(Notification)} which
+	 * calls this method by default for non-touch notifications.
+	 *
+	 * @param eventType
+	 * @param featureId
+	 */
+	public void notifyChanged(final int eventType, final int featureId) {
 	}
 
 	@Override

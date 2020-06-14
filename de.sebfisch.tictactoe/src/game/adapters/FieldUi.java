@@ -47,9 +47,10 @@ public class FieldUi implements Adapter {
 	}
 
 	/**
-	 * Constructs a field UI.
+	 * Constructs a field UI. Use {@link UiAdapterFactory::adaptAllNew} to attach a
+	 * field UI to a field model instance.
 	 */
-	public FieldUi() {
+	FieldUi() {
 		button = new JButton("");
 		button.setPreferredSize(FIELD_DIMENSIONS);
 		button.addActionListener(_event -> makeMove());

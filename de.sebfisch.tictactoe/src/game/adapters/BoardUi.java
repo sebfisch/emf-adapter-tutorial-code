@@ -39,9 +39,10 @@ public class BoardUi implements Adapter {
 	}
 
 	/**
-	 * Constructs a board UI.
+	 * Constructs a board UI. Use {@link UiAdapterFactory::adaptAllNew} to attach a
+	 * board UI to a board model instance.
 	 */
-	public BoardUi() {
+	BoardUi() {
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
 	}

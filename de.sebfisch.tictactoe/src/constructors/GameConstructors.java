@@ -30,6 +30,7 @@ public class GameConstructors {
 			board.getFields().add(emptyField(index));
 		}
 		UI.adaptAllNew(board);
+		ACCESS.adaptAllNew(board);
 		return board;
 	}
 

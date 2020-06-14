@@ -5,6 +5,7 @@ import java.awt.Font;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
@@ -39,5 +40,14 @@ public class UiConstructors {
 		final JLabel label = new JLabel(text, SwingConstants.CENTER);
 		label.setFont(new Font(label.getFont().getName(), Font.BOLD, size));
 		return label;
+	}
+
+	/**
+	 * Constructs a blank component.
+	 *
+	 * @return empty panel
+	 */
+	public static JComponent blankComponent() {
+		return new JPanel();
 	}
 }

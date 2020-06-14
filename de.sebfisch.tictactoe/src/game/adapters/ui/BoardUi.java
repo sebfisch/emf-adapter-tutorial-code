@@ -6,9 +6,13 @@ import java.util.NoSuchElementException;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 
+import constructors.UiConstructors;
 import game.Board;
+import game.GamePackage;
+import game.adapters.access.BoardAccess;
 import util.ObjectAdapter;
 
 /**
@@ -86,5 +90,24 @@ public class BoardUi extends ObjectAdapter<Board> {
 		super.setTarget(board);
 		panel.removeAll();
 		board.getFields().forEach(field -> panel.add(FieldUi.from(field).getUnmarkedComponent()));
+	}
+
+	@Override
+	public void notifyChanged(final int eventType, final int featureId) {
+		if (eventType == Notification.SET && featureId == GamePackage.FIELD__MARK
+				&& BoardAccess.from(getTarget()).hasWinner()) {
+			disableUnmarkedFields();
+		}
+	}
+
+	/**
+	 * Replace user interfaces for unmarked fields with blank components.
+	 */
+	public void disableUnmarkedFields() {
+		getTarget().getFields().forEach(field -> {
+			if (field.getMark() == null) {
+				replaceChild(field.getIndex(), UiConstructors.blankComponent());
+			}
+		});
 	}
 }

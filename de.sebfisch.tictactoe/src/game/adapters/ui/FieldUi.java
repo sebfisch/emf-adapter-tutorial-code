@@ -65,7 +65,10 @@ public class FieldUi extends ObjectAdapter<Field> {
 	public void updateMark() {
 		FieldAccess.from(getTarget()).getMarkingPlayer().ifPresent(player -> {
 			final JComponent child = UiConstructors.boldLabel(player.toString(), LABEL_SIZE);
-			BoardUi.fromContainer(getTarget()).replaceChild(getTarget().getIndex(), child);
+			final BoardUi boardUi = BoardUi.fromContainer(getTarget());
+			boardUi.replaceChild(getTarget().getIndex(), child);
+			child.addKeyListener(boardUi);
+			child.setFocusable(true);
 		});
 	}
 

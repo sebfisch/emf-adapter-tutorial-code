@@ -205,8 +205,17 @@ public class ObjectAdapter<T extends EObject> implements Adapter {
 	@Override
 	public void setTarget(final Notifier newTarget) {
 		if (targetC.isInstance(newTarget)) {
-			target = targetC.cast(newTarget);
+			setTarget(targetC.cast(newTarget));
 		}
+	}
+
+	/**
+	 * More specific variant of {@link Adapter::setTarget(Notifier)}.
+	 *
+	 * @param newTarget new target
+	 */
+	public void setTarget(final T newTarget) {
+		target = newTarget;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package app;
+package constructors;
 
 import java.awt.Font;
 
@@ -11,7 +11,7 @@ import javax.swing.WindowConstants;
 /**
  * Provides static methods to construct user interface objects.
  */
-class UiConstructors {
+public class UiConstructors {
 
 	/**
 	 * Constructs an empty window with the given title.
@@ -20,7 +20,7 @@ class UiConstructors {
 	 *
 	 * @return window object
 	 */
-	static JFrame emptyWindow(final String title) {
+	public static JFrame emptyWindow(final String title) {
 		final JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -35,7 +35,7 @@ class UiConstructors {
 	 *
 	 * @return label component
 	 */
-	static JComponent boldLabel(final String text, final int size) {
+	public static JComponent boldLabel(final String text, final int size) {
 		final JLabel label = new JLabel(text, SwingConstants.CENTER);
 		label.setFont(new Font(label.getFont().getName(), Font.BOLD, size));
 		return label;

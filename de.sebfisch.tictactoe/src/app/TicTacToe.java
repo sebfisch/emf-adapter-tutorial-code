@@ -3,6 +3,8 @@ package app;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import constructors.GameConstructors;
+import constructors.UiConstructors;
 import game.Board;
 
 /**

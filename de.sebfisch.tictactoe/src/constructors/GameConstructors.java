@@ -1,4 +1,4 @@
-package app;
+package constructors;
 
 import game.Board;
 import game.Field;
@@ -9,7 +9,7 @@ import game.Player;
 /**
  * Provides static methods to construct game objects.
  */
-class GameConstructors {
+public class GameConstructors {
 
 	private static final int FIELD_COUNT = 9;
 
@@ -19,7 +19,7 @@ class GameConstructors {
 	 *
 	 * @return model instance representing an empty board
 	 */
-	static Board emptyBoard() {
+	public static Board emptyBoard() {
 		final Board board = GameFactory.eINSTANCE.createBoard();
 		board.setCurrentPlayer(Player.X);
 		for (int index = 0; index < FIELD_COUNT; index++) {
@@ -35,7 +35,7 @@ class GameConstructors {
 	 *
 	 * @return empty field
 	 */
-	static Field emptyField(final int index) {
+	public static Field emptyField(final int index) {
 		final Field field = GameFactory.eINSTANCE.createField();
 		field.setIndex(index);
 		field.setMark(null);
@@ -49,7 +49,7 @@ class GameConstructors {
 	 *
 	 * @return mark for given player.
 	 */
-	static Mark markFor(final Player player) {
+	public static Mark markFor(final Player player) {
 		final Mark mark = GameFactory.eINSTANCE.createMark();
 		mark.setPlayer(player);
 		return mark;

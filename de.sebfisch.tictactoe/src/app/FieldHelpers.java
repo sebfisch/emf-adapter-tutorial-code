@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
+import constructors.GameConstructors;
 import game.Board;
 import game.Field;
 import game.Player;

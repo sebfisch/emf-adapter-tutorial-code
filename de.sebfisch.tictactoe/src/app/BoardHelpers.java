@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import constructors.UiConstructors;
 import game.Board;
 import game.Player;
 

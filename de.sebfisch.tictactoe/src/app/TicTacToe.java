@@ -6,7 +6,7 @@ import javax.swing.SwingUtilities;
 import constructors.GameConstructors;
 import constructors.UiConstructors;
 import game.Board;
-import game.helpers.BoardHelpers;
+import game.adapters.BoardUi;
 
 /**
  * Implements a graphical user interface for playing the game.
@@ -33,7 +33,7 @@ public class TicTacToe {
 	public TicTacToe() {
 		board = GameConstructors.emptyBoard();
 		window = UiConstructors.emptyWindow(WINDOW_TITLE);
-		window.getContentPane().add(BoardHelpers.getComponent(board));
+		window.getContentPane().add(BoardUi.from(board).getComponent());
 	}
 
 	/**

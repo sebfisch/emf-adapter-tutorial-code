@@ -5,6 +5,7 @@ import game.Field;
 import game.GameFactory;
 import game.Mark;
 import game.Player;
+import game.adapters.UiAdapterFactory;
 
 /**
  * Provides static methods to construct game objects.
@@ -12,6 +13,7 @@ import game.Player;
 public class GameConstructors {
 
 	private static final int FIELD_COUNT = 9;
+	private static final UiAdapterFactory UI = new UiAdapterFactory();
 
 	/**
 	 * Creates an board where no player has marked fields yet. The player X is the
@@ -25,6 +27,7 @@ public class GameConstructors {
 		for (int index = 0; index < FIELD_COUNT; index++) {
 			board.getFields().add(emptyField(index));
 		}
+		UI.adaptAllNew(board);
 		return board;
 	}
 
@@ -39,6 +42,7 @@ public class GameConstructors {
 		final Field field = GameFactory.eINSTANCE.createField();
 		field.setIndex(index);
 		field.setMark(null);
+		UI.adaptAllNew(field);
 		return field;
 	}
 

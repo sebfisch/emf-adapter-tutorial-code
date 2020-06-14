@@ -1,6 +1,8 @@
 package game.adapters.ui;
 
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.NoSuchElementException;
 
 import javax.swing.JComponent;
@@ -12,13 +14,14 @@ import org.eclipse.emf.ecore.EObject;
 import constructors.UiConstructors;
 import game.Board;
 import game.GamePackage;
+import game.Player;
 import game.adapters.access.BoardAccess;
 import util.ObjectAdapter;
 
 /**
  * Extends board model instances with user interface related operations.
  */
-public class BoardUi extends ObjectAdapter<Board> {
+public class BoardUi extends ObjectAdapter<Board> implements KeyListener {
 
 	private static final int GRID_SIZE = 3;
 
@@ -59,6 +62,7 @@ public class BoardUi extends ObjectAdapter<Board> {
 		super(Board.class);
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
+		panel.addKeyListener(this);
 	}
 
 	/**
@@ -89,7 +93,12 @@ public class BoardUi extends ObjectAdapter<Board> {
 	public void setTarget(final Board board) {
 		super.setTarget(board);
 		panel.removeAll();
-		board.getFields().forEach(field -> panel.add(FieldUi.from(field).getUnmarkedComponent()));
+		board.getFields().forEach(field -> {
+			field.setMark(null);
+			final JComponent fieldComponent = FieldUi.from(field).getUnmarkedComponent();
+			panel.add(fieldComponent);
+			fieldComponent.addKeyListener(this);
+		});
 	}
 
 	@Override
@@ -106,8 +115,30 @@ public class BoardUi extends ObjectAdapter<Board> {
 	public void disableUnmarkedFields() {
 		getTarget().getFields().forEach(field -> {
 			if (field.getMark() == null) {
-				replaceChild(field.getIndex(), UiConstructors.blankComponent());
+				final JComponent blank = UiConstructors.blankComponent();
+				replaceChild(field.getIndex(), blank);
+				blank.addKeyListener(this);
+				blank.setFocusable(true);
 			}
 		});
+	}
+
+	@Override
+	public void keyTyped(final KeyEvent e) {
+		if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
+			final Board board = getTarget();
+			board.setCurrentPlayer(Player.X);
+			setTarget(board);
+			panel.revalidate();
+			panel.repaint();
+		}
+	}
+
+	@Override
+	public void keyPressed(final KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(final KeyEvent e) {
 	}
 }

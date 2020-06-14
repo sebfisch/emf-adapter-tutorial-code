@@ -8,6 +8,11 @@ import game.util.GameAdapterFactory;
 public class AccessAdapterFactory extends GameAdapterFactory {
 
 	@Override
+	public BoardAccess createBoardAdapter() {
+		return new BoardAccess();
+	}
+
+	@Override
 	public FieldAccess createFieldAdapter() {
 		return new FieldAccess();
 	}

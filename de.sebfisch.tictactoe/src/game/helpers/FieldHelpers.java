@@ -1,13 +1,16 @@
 package game.helpers;
 
 import java.awt.Dimension;
+import java.util.Optional;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import constructors.GameConstructors;
+import constructors.UiConstructors;
 import game.Board;
 import game.Field;
+import game.Mark;
 import game.Player;
 
 /**
@@ -15,23 +18,27 @@ import game.Player;
  */
 class FieldHelpers {
 
+	private static final int LABEL_SIZE = 90;
 	private static final Dimension FIELD_DIMENSIONS = new Dimension(100, 100);
 
 	/**
-	 * Creates a component representing an unmarked field.
+	 * Adds a component representing an unmarked field to the given parent
+	 * component.
 	 *
-	 * It can be clicked to mark the given field with the current player.
+	 * The created component can be clicked to mark the given field with the name of
+	 * the current player.
 	 *
-	 * @param field     field to create a component for
-	 * @param container container to modify when given field is marked
-	 *
-	 * @return component representing unmarked field
+	 * @param field  field to create a component for
+	 * @param parent parent component for the created component
 	 */
-	static JComponent unmarkedFieldComponent(final Field field, final JComponent container) {
+	public static void addUnmarkedFieldComponent(final Field field, final JComponent parent) {
 		final JButton button = new JButton("");
 		button.setPreferredSize(FIELD_DIMENSIONS);
-		button.addActionListener(_event -> BoardHelpers.markFieldAt(container, field.getIndex(), makeMoveAt(field)));
-		return button;
+		button.addActionListener(_event -> {
+			makeMoveAt(field);
+			updateMark(field, parent);
+		});
+		parent.add(button);
 	}
 
 	/**
@@ -42,11 +49,35 @@ class FieldHelpers {
 	 *
 	 * @return player that made the move
 	 */
-	static Player makeMoveAt(final Field field) {
+	public static void makeMoveAt(final Field field) {
 		final Board board = field.getBoard();
 		final Player player = board.getCurrentPlayer();
 		field.setMark(GameConstructors.markFor(player));
 		board.setCurrentPlayer(Player.X.equals(player) ? Player.O : Player.X);
-		return player;
+	}
+
+	/**
+	 * Shows the name of the marking player on the user interface component for the
+	 * given field.
+	 *
+	 * @param parent parent component containing the component for this field
+	 * @param field  field model instance
+	 */
+	public static void updateMark(final Field field, final JComponent parent) {
+		getMarkingPlayer(field).ifPresent(player -> {
+			final JComponent child = UiConstructors.boldLabel(player.toString(), LABEL_SIZE);
+			BoardHelpers.replaceChild(parent, field.getIndex(), child);
+		});
+	}
+
+	/**
+	 * Provides access to the player whose mark is on the given field.
+	 *
+	 * @param field field model instance
+	 *
+	 * @return marking player or empty if no mark is present
+	 */
+	public static Optional<Player> getMarkingPlayer(final Field field) {
+		return Optional.ofNullable(field.getMark()).map(Mark::getPlayer);
 	}
 }

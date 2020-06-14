@@ -5,9 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import constructors.UiConstructors;
 import game.Board;
-import game.Player;
 
 /**
  * Provides static methods operating on board model instances.
@@ -15,7 +13,6 @@ import game.Player;
 public class BoardHelpers {
 
 	private static final int GRID_SIZE = 3;
-	private static final int LABEL_SIZE = 90;
 
 	/**
 	 * Creates a user interface for the given board.
@@ -31,22 +28,22 @@ public class BoardHelpers {
 	public static JComponent getComponent(final Board board) {
 		final JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
-		board.getFields().forEach(field -> panel.add(FieldHelpers.unmarkedFieldComponent(field, panel)));
+		board.getFields().forEach(field -> FieldHelpers.addUnmarkedFieldComponent(field, panel));
 		return panel;
 	}
 
 	/**
-	 * Modifies the given container. The child at the given index is replaced with a
-	 * mark for the given player.
+	 * Modifies the given parent component, replacing the child at the given index
+	 * with the given child component.
 	 *
-	 * @param container container to replace component in
-	 * @param index     index of child to replace
-	 * @param player    player to create a mark for
+	 * @param parent parent component
+	 * @param index  index of child component to replace
+	 * @param child  new child component
 	 */
-	public static void markFieldAt(final JComponent container, final int index, final Player player) {
-		container.remove(index);
-		container.add(UiConstructors.boldLabel(player.toString(), LABEL_SIZE), index);
-		container.revalidate();
-		container.repaint();
+	public static void replaceChild(final JComponent parent, final int index, final JComponent child) {
+		parent.remove(index);
+		parent.add(child, index);
+		parent.revalidate();
+		parent.repaint();
 	}
 }

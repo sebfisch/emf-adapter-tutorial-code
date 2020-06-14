@@ -3,17 +3,14 @@ package game.adapters.access;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
-
 import constructors.GameConstructors;
 import game.Board;
 import game.Field;
 import game.Mark;
 import game.Player;
+import util.ObjectAdapter;
 
-public class FieldAccess implements Adapter {
+public class FieldAccess extends ObjectAdapter<Field> {
 
 	/**
 	 * Provides access to the field access adapter registered with a field model
@@ -26,13 +23,8 @@ public class FieldAccess implements Adapter {
 	 * @throws NoSuchElementException if no field access adapter is registered
 	 */
 	public static FieldAccess from(final Field field) {
-		return field.eAdapters().stream() //
-				.filter(FieldAccess.class::isInstance) //
-				.map(FieldAccess.class::cast) //
-				.findFirst().orElseThrow();
+		return from(field, FieldAccess.class);
 	}
-
-	private Field field;
 
 	/**
 	 * Constructs a field access adapter. Use
@@ -40,6 +32,7 @@ public class FieldAccess implements Adapter {
 	 * a field model instance.
 	 */
 	FieldAccess() {
+		super(Field.class);
 	}
 
 	/**
@@ -47,9 +40,9 @@ public class FieldAccess implements Adapter {
 	 * field.
 	 */
 	public void makeMove() {
-		final Board board = field.getBoard();
+		final Board board = getTarget().getBoard();
 		final Player player = board.getCurrentPlayer();
-		field.setMark(GameConstructors.markFor(player));
+		getTarget().setMark(GameConstructors.markFor(player));
 		board.setCurrentPlayer(Player.X.equals(player) ? Player.O : Player.X);
 	}
 
@@ -59,27 +52,6 @@ public class FieldAccess implements Adapter {
 	 * @return marking player or empty if no mark is present
 	 */
 	public Optional<Player> getMarkingPlayer() {
-		return Optional.ofNullable(field.getMark()).map(Mark::getPlayer);
-	}
-
-	@Override
-	public void notifyChanged(final Notification notification) {
-	}
-
-	@Override
-	public Field getTarget() {
-		return field;
-	}
-
-	@Override
-	public void setTarget(final Notifier target) {
-		if (target instanceof Field) {
-			field = (Field) target;
-		}
-	}
-
-	@Override
-	public boolean isAdapterForType(final Object target) {
-		return target instanceof Field;
+		return Optional.ofNullable(getTarget().getMark()).map(Mark::getPlayer);
 	}
 }

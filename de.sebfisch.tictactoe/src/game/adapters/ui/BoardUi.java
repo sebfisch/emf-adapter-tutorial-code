@@ -6,20 +6,18 @@ import java.util.NoSuchElementException;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.EObject;
 
 import game.Board;
+import util.ObjectAdapter;
 
 /**
  * Extends board model instances with user interface related operations.
  */
-public class BoardUi implements Adapter {
+public class BoardUi extends ObjectAdapter<Board> {
 
 	private static final int GRID_SIZE = 3;
 
-	private Board board;
 	private final JPanel panel;
 
 	/**
@@ -32,10 +30,21 @@ public class BoardUi implements Adapter {
 	 * @throws NoSuchElementException if no board UI is registered
 	 */
 	public static BoardUi from(final Board board) {
-		return board.eAdapters().stream() //
-				.filter(BoardUi.class::isInstance) //
-				.map(BoardUi.class::cast) //
-				.findFirst().orElseThrow();
+		return from(board, BoardUi.class);
+	}
+
+	/**
+	 * Provides access to the board UI registered with a board container of the
+	 * given child object.
+	 *
+	 * @param child child of a board model instance
+	 *
+	 * @return board UI
+	 *
+	 * @throws NoSuchElementException if no board UI is registered with a container
+	 */
+	public static BoardUi fromContainer(final EObject child) {
+		return fromContainer(child, Board.class, BoardUi.class);
 	}
 
 	/**
@@ -43,6 +52,7 @@ public class BoardUi implements Adapter {
 	 * board UI to a board model instance.
 	 */
 	BoardUi() {
+		super(Board.class);
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
 	}
@@ -72,25 +82,9 @@ public class BoardUi implements Adapter {
 	}
 
 	@Override
-	public void notifyChanged(final Notification notification) {
-	}
-
-	@Override
-	public Board getTarget() {
-		return board;
-	}
-
-	@Override
-	public void setTarget(final Notifier target) {
-		if (target instanceof Board) {
-			board = (Board) target;
-			panel.removeAll();
-			board.getFields().forEach(field -> panel.add(FieldUi.from(field).getUnmarkedComponent()));
-		}
-	}
-
-	@Override
-	public boolean isAdapterForType(final Object target) {
-		return target instanceof Board;
+	public void setTarget(final Board board) {
+		super.setTarget(board);
+		panel.removeAll();
+		board.getFields().forEach(field -> panel.add(FieldUi.from(field).getUnmarkedComponent()));
 	}
 }

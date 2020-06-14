@@ -25,12 +25,14 @@ import org.eclipse.emf.ecore.EObject;
 public interface Field extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Mark</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link game.Mark#getField <em>Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Mark</em>' containment reference.
 	 * @see #setMark(Mark)
 	 * @see game.GamePackage#getField_Mark()
-	 * @model containment="true"
+	 * @see game.Mark#getField
+	 * @model opposite="field" containment="true"
 	 * @generated
 	 */
 	Mark getMark();

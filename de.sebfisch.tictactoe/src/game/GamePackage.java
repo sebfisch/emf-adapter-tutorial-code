@@ -178,13 +178,22 @@ public interface GamePackage extends EPackage {
 	int MARK__PLAYER = 0;
 
 	/**
+	 * The feature id for the '<em><b>Field</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MARK__FIELD = 1;
+
+	/**
 	 * The number of structural features of the '<em>Mark</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MARK_FEATURE_COUNT = 1;
+	int MARK_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Mark</em>' class.
@@ -303,6 +312,17 @@ public interface GamePackage extends EPackage {
 	EAttribute getMark_Player();
 
 	/**
+	 * Returns the meta object for the container reference '{@link game.Mark#getField <em>Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Field</em>'.
+	 * @see game.Mark#getField()
+	 * @see #getMark()
+	 * @generated
+	 */
+	EReference getMark_Field();
+
+	/**
 	 * Returns the meta object for enum '{@link game.Player <em>Player</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -412,6 +432,14 @@ public interface GamePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MARK__PLAYER = eINSTANCE.getMark_Player();
+
+		/**
+		 * The meta object literal for the '<em><b>Field</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MARK__FIELD = eINSTANCE.getMark_Field();
 
 		/**
 		 * The meta object literal for the '{@link game.Player <em>Player</em>}' enum.

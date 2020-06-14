@@ -13,12 +13,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mark" eType="#//Mark" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mark" eType="#//Mark" containment="true"
+        eOpposite="#//Mark/field"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="board" lowerBound="1" eType="#//Board"
         eOpposite="#//Board/fields"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mark">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="player" lowerBound="1"
         eType="#//Player"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="#//Field"
+        eOpposite="#//Field/mark"/>
   </eClassifiers>
 </ecore:EPackage>

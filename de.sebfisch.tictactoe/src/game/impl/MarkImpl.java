@@ -2,16 +2,20 @@
  */
 package game.impl;
 
+import game.Field;
 import game.GamePackage;
 import game.Mark;
 import game.Player;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link game.impl.MarkImpl#getPlayer <em>Player</em>}</li>
+ *   <li>{@link game.impl.MarkImpl#getField <em>Field</em>}</li>
  * </ul>
  *
  * @generated
@@ -92,11 +97,98 @@ public class MarkImpl extends MinimalEObjectImpl.Container implements Mark {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Field getField() {
+		if (eContainerFeatureID() != GamePackage.MARK__FIELD) return null;
+		return (Field)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetField(Field newField, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newField, GamePackage.MARK__FIELD, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setField(Field newField) {
+		if (newField != eInternalContainer() || (eContainerFeatureID() != GamePackage.MARK__FIELD && newField != null)) {
+			if (EcoreUtil.isAncestor(this, newField))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newField != null)
+				msgs = ((InternalEObject)newField).eInverseAdd(this, GamePackage.FIELD__MARK, Field.class, msgs);
+			msgs = basicSetField(newField, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GamePackage.MARK__FIELD, newField, newField));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GamePackage.MARK__FIELD:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetField((Field)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GamePackage.MARK__FIELD:
+				return basicSetField(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case GamePackage.MARK__FIELD:
+				return eInternalContainer().eInverseRemove(this, GamePackage.FIELD__MARK, Field.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GamePackage.MARK__PLAYER:
 				return getPlayer();
+			case GamePackage.MARK__FIELD:
+				return getField();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -111,6 +203,9 @@ public class MarkImpl extends MinimalEObjectImpl.Container implements Mark {
 		switch (featureID) {
 			case GamePackage.MARK__PLAYER:
 				setPlayer((Player)newValue);
+				return;
+			case GamePackage.MARK__FIELD:
+				setField((Field)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,6 +222,9 @@ public class MarkImpl extends MinimalEObjectImpl.Container implements Mark {
 			case GamePackage.MARK__PLAYER:
 				setPlayer(PLAYER_EDEFAULT);
 				return;
+			case GamePackage.MARK__FIELD:
+				setField((Field)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -141,6 +239,8 @@ public class MarkImpl extends MinimalEObjectImpl.Container implements Mark {
 		switch (featureID) {
 			case GamePackage.MARK__PLAYER:
 				return player != PLAYER_EDEFAULT;
+			case GamePackage.MARK__FIELD:
+				return getField() != null;
 		}
 		return super.eIsSet(featureID);
 	}

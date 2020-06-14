@@ -113,9 +113,9 @@ public class FieldImpl extends MinimalEObjectImpl.Container implements Field {
 		if (newMark != mark) {
 			NotificationChain msgs = null;
 			if (mark != null)
-				msgs = ((InternalEObject)mark).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GamePackage.FIELD__MARK, null, msgs);
+				msgs = ((InternalEObject)mark).eInverseRemove(this, GamePackage.MARK__FIELD, Mark.class, msgs);
 			if (newMark != null)
-				msgs = ((InternalEObject)newMark).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GamePackage.FIELD__MARK, null, msgs);
+				msgs = ((InternalEObject)newMark).eInverseAdd(this, GamePackage.MARK__FIELD, Mark.class, msgs);
 			msgs = basicSetMark(newMark, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -172,6 +172,10 @@ public class FieldImpl extends MinimalEObjectImpl.Container implements Field {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case GamePackage.FIELD__MARK:
+				if (mark != null)
+					msgs = ((InternalEObject)mark).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GamePackage.FIELD__MARK, null, msgs);
+				return basicSetMark((Mark)otherEnd, msgs);
 			case GamePackage.FIELD__BOARD:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);

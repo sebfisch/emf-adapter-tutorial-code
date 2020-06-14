@@ -21,6 +21,7 @@
     </genClasses>
     <genClasses ecoreClass="game.ecore#//Mark">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute game.ecore#//Mark/player"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference game.ecore#//Mark/field"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

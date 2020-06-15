@@ -6,7 +6,7 @@ import javax.swing.SwingUtilities;
 import constructors.GameConstructors;
 import constructors.UiConstructors;
 import game.Board;
-import game.adapters.BoardUi;
+import game.adapters.ui.BoardUi;
 
 /**
  * Implements a graphical user interface for playing the game.

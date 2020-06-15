@@ -1,8 +1,7 @@
-package game.adapters;
+package game.adapters.ui;
 
 import java.awt.Dimension;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -11,13 +10,10 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 
-import constructors.GameConstructors;
 import constructors.UiConstructors;
-import game.Board;
 import game.Field;
 import game.GamePackage;
-import game.Mark;
-import game.Player;
+import game.adapters.access.FieldAccess;
 
 /**
  * Extends field model instances with user interface related operations.
@@ -53,7 +49,7 @@ public class FieldUi implements Adapter {
 	FieldUi() {
 		button = new JButton("");
 		button.setPreferredSize(FIELD_DIMENSIONS);
-		button.addActionListener(_event -> makeMove());
+		button.addActionListener(_event -> FieldAccess.from(field).makeMove());
 	}
 
 	/**
@@ -67,34 +63,11 @@ public class FieldUi implements Adapter {
 	}
 
 	/**
-	 * Modifies the board to reflect a move of the current player on the associated
-	 * field.
-	 *
-	 * @return player that made the move
-	 */
-	public Player makeMove() {
-		final Board board = field.getBoard();
-		final Player player = board.getCurrentPlayer();
-		field.setMark(GameConstructors.markFor(player));
-		board.setCurrentPlayer(Player.X.equals(player) ? Player.O : Player.X);
-		return player;
-	}
-
-	/**
-	 * Provides access to the player whose mark is on the associated field.
-	 *
-	 * @return marking player or empty if no mark is present
-	 */
-	public Optional<Player> getMarkingPlayer() {
-		return Optional.ofNullable(field.getMark()).map(Mark::getPlayer);
-	}
-
-	/**
 	 * Shows the name of the marking player on the user interface component for the
 	 * associated field.
 	 */
 	public void updateMark() {
-		getMarkingPlayer().ifPresent(player -> {
+		FieldAccess.from(field).getMarkingPlayer().ifPresent(player -> {
 			final JComponent child = UiConstructors.boldLabel(player.toString(), LABEL_SIZE);
 			BoardUi.from(field.getBoard()).replaceChild(field.getIndex(), child);
 		});

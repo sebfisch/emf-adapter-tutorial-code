@@ -1,9 +1,9 @@
-package game.adapters;
+package game.adapters.ui;
 
 import game.util.GameAdapterFactory;
 
 /**
- * Creates adapters for game model instances.
+ * Creates user interface adapters for game model instances.
  */
 public class UiAdapterFactory extends GameAdapterFactory {
 

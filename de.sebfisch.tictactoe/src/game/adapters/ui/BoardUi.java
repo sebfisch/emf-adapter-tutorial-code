@@ -1,4 +1,4 @@
-package game.adapters;
+package game.adapters.ui;
 
 import java.awt.GridLayout;
 import java.util.NoSuchElementException;

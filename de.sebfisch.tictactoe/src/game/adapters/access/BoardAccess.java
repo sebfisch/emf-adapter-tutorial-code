@@ -2,12 +2,12 @@ package game.adapters.access;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import game.Board;
 import game.Field;
 import game.Player;
-import util.Iter;
 import util.ObjectAdapter;
 
 public class BoardAccess extends ObjectAdapter<Board> {
@@ -55,18 +55,12 @@ public class BoardAccess extends ObjectAdapter<Board> {
 	}
 
 	private Stream<Stream<FieldAccess>> lines() {
-		final Stream.Builder<Stream<FieldAccess>> builder = Stream.builder();
-
-		Iter.range(3).forEach(row -> builder.add(line(3 * row, 3 * row + 1, 3 * row + 2)));
-		Iter.range(3).forEach(col -> builder.add(line(col, 3 + col, 6 + col)));
-		builder.add(line(0, 4, 8));
-		builder.add(line(2, 4, 6));
-
-		return builder.build();
-	}
-
-	private Stream<FieldAccess> line(final Integer... indices) {
 		final List<Field> fields = getTarget().getFields();
-		return Stream.of(indices).map(fields::get).map(FieldAccess::from);
+		return Stream.of(//
+				IntStream.range(0, 3).mapToObj(row -> IntStream.of(3 * row, 3 * row + 1, 3 * row + 2)), //
+				IntStream.range(0, 3).mapToObj(col -> IntStream.of(col, 3 + col, 6 + col)), //
+				Stream.of(IntStream.of(0, 4, 2), IntStream.of(2, 4, 6)) //
+		).flatMap(stream -> stream) //
+				.map(indices -> indices.mapToObj(fields::get).map(FieldAccess::from));
 	}
 }

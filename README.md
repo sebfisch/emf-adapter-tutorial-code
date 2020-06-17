@@ -15,3 +15,5 @@ check out the tag for the first step as follows:
     git checkout -b step1 step1-static-methods-v1
 
 This will create a new branch `step1` that you can use to track your own development.
+
+© 2020, Sebastian Fischer, [CC-BY-ND 4.0](http://creativecommons.org/licenses/by-nd/4.0/)

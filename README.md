@@ -1,4 +1,4 @@
-# Code underlying my EMF adapter tutorial
+# Code underlying my [EMF adapter tutorial](https://sebfisch.github.io/emf-adapter-tutorial/)
 
 This is an example application, 
 demonstrating the use of hand-written adapters with the Eclipse Modelling Framework (EMF).
